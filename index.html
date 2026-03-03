@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To (he/her name)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #fff5f5; overflow: hidden; margin: 0; }
+        
+        .heart {
+            position: absolute;
+            z-index: 999;
+            pointer-events: none;
+            animation: floatAndSide 5s linear forwards;
+        }
+
+        @keyframes floatAndSide {
+            0% { transform: translateY(0) translateX(0) scale(1); opacity: 1; }
+            50% { transform: translateY(-50vh) translateX(20px) scale(1.2); opacity: 0.8; }
+            100% { transform: translateY(-110vh) translateX(-20px) scale(1.5); opacity: 0; }
+        }
+
+        .shimmer {
+            background: linear-gradient(90deg, #ff4d4d, #f9cb28, #ff4d4d);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 2s linear infinite;
+        }
+
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center h-screen font-sans">
+
+    <h2 id="congrats-text" class="hidden text-5xl font-black mb-4 shimmer tracking-widest transition-all duration-1000">
+        CONGRATULATIONS!
+    </h2>
+
+    <img id="main-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1eXp6ZzR4eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" 
+         class="w-72 h-64 mb-8 rounded-lg shadow-lg object-cover">
+
+    <h1 id="question" class="text-4xl font-bold text-red-600 mb-2">Will you be my Valentine? ❤️</h1>
+
+    <p id="extra-text" class="hidden text-xl text-red-600 font-light mt-0 italic">
+        To my dearest lover (he/her name)
+    </p>
+
+    <div class="flex space-x-8 mt-10" id="buttons">
+        <button onclick="celebrate()" 
+                class="bg-pink-500 hover:bg-pink-600 text-white px-10 py-4 rounded-full text-2xl font-semibold transition-all transform hover:scale-110 shadow-xl">
+            Yes!
+        </button>
+        <button id="no-btn" onmouseover="moveButton()" 
+                class="bg-gray-400 text-white px-10 py-4 rounded-full text-2xl font-semibold transition-all shadow-lg">
+            No
+        </button>
+    </div>
+
+    <script>
+        function moveButton() {
+            const btn = document.getElementById('no-btn');
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.position = 'absolute';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function celebrate() {
+            document.getElementById('congrats-text').classList.remove('hidden');
+            document.getElementById('extra-text').classList.remove('hidden');
+            document.getElementById('question').innerText = "Love you forever! 😘😘😘";
+            document.getElementById('main-gif').src = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGlxbXM3YjJqM2ZldW9za3E4c2RyZjc1bG42M3d0dGo4N3M0NHFmeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1JmGiBtqTuehfYxuy9/giphy.gif";
+            document.getElementById('buttons').classList.add('hidden');
+
+            const duration = 15 * 1000;
+            const animationEnd = Date.now() + duration;
+            const interval = setInterval(function() {
+                if (Date.now() > animationEnd) {
+                    return clearInterval(interval);
+                }
+                createHeart();
+            }, 100); 
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            const heartTypes = ['❤️', '🧡', '🤎', '💛', '💚', '🩵', '💙', '💜', '🩷', '🤍'];
+            heart.innerHTML = heartTypes[Math.floor(Math.random() * heartTypes.length)];
+            
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.bottom = '-5vh';
+            heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+            
+            const fallDuration = Math.random() * 3 + 4;
+            heart.style.animationDuration = fallDuration + 's';
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, fallDuration * 1000);
+        }
+    </script>
+</body>
+</html>
