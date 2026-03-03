@@ -8,8 +8,8 @@
 * **Mobile Friendly**: Fully responsive design.
 
 ## 🏃🏼‍♂️‍➡️ How to run
-Copy `index.html` and run it on your html editor
-View a live demo here: https://titanium-bullet.github.io/Valentine--/
+* Copy `index.html` and run it on your html editor
+* View a live demo here: https://titanium-bullet.github.io/Valentine--/
 
 ## 🛠️ Customization
 To make this your own, open `index.html` and modify the following:
