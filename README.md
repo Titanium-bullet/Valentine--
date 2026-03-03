@@ -7,9 +7,14 @@
 * **Customizable**: Easy to swap out images, text, and names to fit your personal style.
 * **Mobile Friendly**: Fully responsive design.
 
+## 🏃🏼‍♂️‍➡️ How to run
+Copy `index.html` and run it on your html editor
+View a live demo here: https://titanium-bullet.github.io/Valentine--/
+
 ## 🛠️ Customization
 To make this your own, open `index.html` and modify the following:
-1. **The Name**: Find the `<p id="extra-text">` tag and change the text to your partner's name.
-2. **The Title**: Find the `<p id="extra-text">` tag and change the text to your partner's name.
+1. **The Name**: Go to line 49 of `index.html` and change the text to your partner's name.
+2. **The Title**: Go to line 6 of `index.html` and put your partner's name there.
+
 ---
 *Built with love. Feel free to fork and customize!*
