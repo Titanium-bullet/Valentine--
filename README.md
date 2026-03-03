@@ -16,5 +16,10 @@ To make this your own, open `index.html` and modify the following:
 1. **The Name**: Go to line 49 of `index.html` and change the text to your partner's name.
 2. **The Title**: Go to line 6 of `index.html` and put your partner's name there.
 
+## 🎨 Credits & Attributions
+This project uses the following creative assets:
+* **Initial GIF**: https://giphy.com/gifs/cLS1cfxvGOPVpf9g3y via GIPHY.
+* **Success GIF**: https://giphy.com/gifs/1JmGiBtqTuehfYxuy9 via GIPHY.
+
 ---
 *Built with love. Feel free to fork and customize!*
