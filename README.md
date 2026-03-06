@@ -22,4 +22,4 @@ This project uses the following creative assets:
 * **Success GIF**: https://giphy.com/gifs/1JmGiBtqTuehfYxuy9 via GIPHY.
 
 ---
-*Built with love. Feel free to fork and customize!*
+*Fully open source. Built with love. Feel free to fork and customize!*
