@@ -21,6 +21,7 @@ A cute, interactive "Will You Be My Valentine?" webpage with:
 - Pure HTML + CSS + vanilla JavaScript (no framework)  
 - Tailwind CSS CDN for utility classes + lots of custom animations
 
+
 ## 🚀 Demo
 
 You can try it right now:
@@ -36,18 +37,17 @@ Or just open `index.html` in any modern browser — no build step needed!
 - Vanilla JavaScript  
 - Google Fonts (Dancing Script + Poppins)  
 
+
 ## ✨ Credits & External Resources
+Main gif:
+https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1eXp6ZzR4eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif
 
-| Resource                        | URL / Source                                                                 | Purpose                          |
-|--------------------------------|-------------------------------------------------------------------------------|----------------------------------|
-| Main bear GIF (happy)          | https://media.giphy.com/.../cLS1cfxvGOPVpf9g3y/giphy.gif                    | Default cute reaction            |
-| Sad puppy GIF                  | https://media0.giphy.com/.../lPM06f2zvk94jBAzlP/giphy.gif                   | Shown after hovering "No"        |
-| Celebration GIF                | https://media2.giphy.com/.../1JmGiBtqTuehfYxuy9/giphy.gif                   | Shown after "Yes"                |
-| Dancing Script font            | Google Fonts                                                                  | Romantic title font              |
-| Poppins font                   | Google Fonts                                                                  | Body & button text               |
-| Tailwind CSS                   | https://cdn.tailwindcss.com                                                   | Utility classes                  |
+Sad gif:
+https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjc0ZHI3bmQxaWtzcDBwczZ4eTA2M2Y1M3hvcnFvaHFzcWRveGY3NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/lPM06f2zvk94jBAzlP/giphy.gif
 
-All GIFs are hotlinked from GIPHY. If they ever stop working, you can download them and serve locally.
+Success gif: 
+https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdTdhaG5nODllaTM3aWplemx1bnNwbmhsOWtibnJ6OHA3eTRkcmxlMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1JmGiBtqTuehfYxuy9/giphy.gif
+
 
 ## 📋 How to Use / Customize
 
