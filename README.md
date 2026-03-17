@@ -24,7 +24,7 @@ A cute, interactive "Will You Be My Valentine?" webpage with:
 ## 🚀 Demo
 
 You can try it right now:
-→ https://titanium-bullet.github.io/valentine-project/  
+→  https://titanium-bullet.github.io/Valentine--/ 
 Or just open `index.html` in any modern browser — no build step needed!
 
 
