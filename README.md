@@ -1,4 +1,3 @@
-# Valentine--
 # 💌 Valentine's Day Proposal
 
 A cute, interactive "Will You Be My Valentine?" webpage with:
