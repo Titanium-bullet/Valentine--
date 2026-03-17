@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -82,6 +82,26 @@
             50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
         }
 
+        .question-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInTransition 1s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        .question-container.hide {
+            display: none;
+        }
+
+        @keyframes fadeInTransition {
+            to { opacity: 1; }
+        }
+
         .main-gif {
             width: 280px;
             height: 260px;
@@ -106,7 +126,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: gradient-shift 3s ease infinite;
-            text-align: center;
             margin-bottom: 10px;
         }
 
@@ -120,7 +139,6 @@
             color: #ffb6d9;
             font-size: 1.1rem;
             margin-bottom: 30px;
-            text-align: center;
             opacity: 0.9;
         }
 
@@ -151,7 +169,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
             transition: left 0.5s;
         }
 
@@ -163,6 +181,7 @@
             background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 50%, #ff6b9d 100%);
             color: white;
             box-shadow: 0 8px 30px rgba(255, 107, 157, 0.5);
+            z-index: 100;
         }
 
         .btn-yes:hover {
@@ -174,23 +193,18 @@
             background: linear-gradient(135deg, #4a4a4a 0%, #6a6a6a 100%);
             color: white;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .btn-no:hover {
-            transform: scale(1.05);
-            background: linear-gradient(135deg, #5a5a5a 0%, #7a7a7a 100%);
-        }
-
-        .floating-hearts {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
             z-index: 100;
+        }
+
+        .floating-hearts, .confetti, .flower-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
             overflow: hidden;
         }
+        .floating-hearts { z-index: 100; }
+        .flower-container { z-index: 150; }
+        .confetti { z-index: 200; }
 
         .floating-heart {
             position: absolute;
@@ -204,16 +218,6 @@
             100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
 
-        .confetti {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 200;
-        }
-
         .confetti-piece {
             position: absolute;
             width: 10px;
@@ -224,17 +228,6 @@
         @keyframes confetti-fall {
             0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
             100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
-        }
-
-        .flower-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 150;
-            overflow: hidden;
         }
 
         .flower {
@@ -259,10 +252,6 @@
         .success-container.show {
             display: flex;
             animation: fadeIn 1s ease;
-        }
-
-        .question-container.hide {
-            display: none;
         }
 
         @keyframes fadeIn {
@@ -292,24 +281,45 @@
 
         .no-messages {
             position: fixed;
-            bottom: 30px;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
             color: #ff6b9d;
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             opacity: 0;
-            transition: opacity 0.3s;
-            z-index: 50;
+            z-index: 500;
             text-align: center;
+            font-weight: 600;
+            pointer-events: none;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+            white-space: nowrap;
+            overflow: visible;
         }
 
         .no-messages.show {
-            opacity: 1;
-            animation: fadeIn 0.5s ease;
+            animation: popMessage 2s ease forwards;
+        }
+
+        @keyframes popMessage {
+            0% { opacity: 0; transform: translate(-50%, 20px); }
+            15% { opacity: 1; transform: translate(-50%, 0); }
+            85% { opacity: 1; transform: translate(-50%, 0); }
+            100% { opacity: 0; transform: translate(-50%, -20px); }
         }
 
         .glow-text {
             text-shadow: 0 0 10px rgba(255, 107, 157, 0.8), 0 0 20px rgba(255, 107, 157, 0.6), 0 0 30px rgba(255, 107, 157, 0.4);
+        }
+
+        .envelope-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #ffffff 0%, #fff8f0 50%, #fff5ee 100%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .intro-typewriter {
@@ -318,7 +328,7 @@
             left: 50%;
             transform: translateX(-50%);
             font-family: 'Dancing Script', cursive;
-            font-size: 2.5rem;
+            font-size: 4rem;
             color: #ff6b9d;
             text-shadow: 0 0 20px rgba(255, 107, 157, 0.8), 0 0 40px rgba(255, 107, 157, 0.4);
             text-align: center;
@@ -328,53 +338,22 @@
             white-space: nowrap;
         }
 
-        .intro-typewriter.show {
-            opacity: 1;
-        }
-
-        .intro-typewriter .cursor {
-            animation: blink 0.7s infinite;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        .envelope-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1a0a1a 0%, #2d1b3d 50%, #1a0a1a 100%);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .envelope-container.hide {
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
+        .intro-typewriter.show { opacity: 1; }
+        .intro-typewriter.fade-out { opacity: 0; transition: opacity 0.5s ease; }
 
         .envelope-wrapper {
             position: relative;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 80px;
+            justify-content: center;
+            margin-top: 40px;
         }
 
         .envelope {
             position: relative;
-            width: 450px;
-            height: 320px;
-            cursor: pointer;
+            width: 350px;
+            height: 240px;
             animation: float 3s ease-in-out infinite;
+            transform-origin: center center;
         }
 
         .envelope.no-float {
@@ -386,195 +365,27 @@
             animation: popOpen 0.9s ease forwards;
         }
 
+        .envelope.expand-massive {
+            animation: massiveExpand 1.5s ease-in forwards;
+        }
+
+        @keyframes massiveExpand {
+            0% { transform: translateY(30px) scale(1); opacity: 1; }
+            30% { transform: translateY(30px) scale(1.2); opacity: 1; }
+            100% { transform: translateY(30px) scale(15); opacity: 0; }
+        }
+
         @keyframes popOpen {
             0% { transform: translateY(30px) scale(1); }
-            25% { transform: translateY(30px) scale(1.25); }
-            50% { transform: translateY(30px) scale(1.2); }
-            70% { transform: translateY(30px) scale(1.3); }
+            25% { transform: translateY(30px) scale(1.15); }
+            50% { transform: translateY(30px) scale(1.1); }
+            70% { transform: translateY(30px) scale(1.2); }
             100% { transform: translateY(30px) scale(1); }
         }
 
-        .envelope.shake {
-            animation: envelopeShake 0.5s ease;
-        }
-
-        @keyframes envelopeShake {
-            0%, 100% { transform: translateY(30px) rotate(0deg); }
-            20% { transform: translateY(30px) rotate(-3deg); }
-            40% { transform: translateY(30px) rotate(3deg); }
-            60% { transform: translateY(30px) rotate(-2deg); }
-            80% { transform: translateY(30px) rotate(2deg); }
-        }
-
         .envelope-back {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #ffb6d9 0%, #ff6b9d 50%, #ff8fab 100%);
-            border-radius: 0 0 25px 25px;
-            box-shadow: 0 15px 50px rgba(255, 107, 157, 0.5), 0 0 30px rgba(255, 107, 157, 0.3);
-        }
-
-        .envelope-flap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 225px solid transparent;
-            border-right: 225px solid transparent;
-            border-top: 160px solid #ff8fab;
-            transform-origin: top;
-            transition: transform 1s ease 0.4s;
-            z-index: 10;
-            filter: brightness(1.1);
-        }
-
-        .envelope.open .envelope-flap {
-            transform: rotateX(180deg);
-        }
-
-        .envelope-front {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 225px solid transparent;
-            border-right: 225px solid transparent;
-            border-bottom: 160px solid #ffc4d9;
-            z-index: 8;
-        }
-
-        .envelope-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
-            border-radius: 25px;
-            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.6) 0%, rgba(255, 182, 217, 0.4) 40%, transparent 70%);
-            opacity: 0;
-            z-index: 5;
-            pointer-events: none;
-        }
-
-        .envelope.open .envelope-glow {
-            animation: glowPulse 1.5s ease forwards;
-        }
-
-        @keyframes glowPulse {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
-            30% { opacity: 1; transform: translate(-50%, -50%) scale(1.5); }
-            70% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.8); }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(2); }
-        }
-
-        .sparkle {
-            position: absolute;
-            font-size: 1.5rem;
-            opacity: 0;
-            z-index: 20;
-            pointer-events: none;
-        }
-
-        .envelope.open .sparkle {
-            animation: sparkleFly 2s ease-out forwards;
-        }
-
-        @keyframes sparkleFly {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
-            15% { opacity: 1; transform: translate(calc(-50% + var(--tx) * 0.3), calc(-50% + var(--ty) * 0.3)) scale(1.3); }
-            50% { opacity: 1; transform: translate(var(--tx), var(--ty)) scale(1.1); }
-            100% { opacity: 0; transform: translate(var(--tx-end), var(--ty-end)) scale(0.2); }
-        }
-
-        .intro-sparkles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1500;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .intro-sparkles.show {
-            opacity: 1;
-        }
-
-        .intro-sparkles .sparkle-particle {
-            position: absolute;
-            font-size: 2rem;
-            animation: fullScreenBurst 2s ease-out forwards;
-        }
-
-        @keyframes fullScreenBurst {
-            0% { 
-                opacity: 1; 
-                transform: translate(-50%, -50%) scale(0.5);
-            }
-            50% {
-                opacity: 1;
-                transform: translate(var(--x), var(--y)) scale(1.5);
-            }
-            100% { 
-                opacity: 0; 
-                transform: translate(var(--x-end), var(--y-end)) scale(0.2);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .title { font-size: 2rem; }
-            .main-gif { width: 220px; height: 200px; }
-            .btn { padding: 14px 30px; font-size: 1.1rem; }
-            .buttons-container { gap: 15px; }
-            .intro-typewriter { font-size: 1.6rem; top: 10%; }
-            .envelope { width: 300px; height: 210px; }
-            .envelope-flap { border-left: 150px solid transparent; border-right: 150px solid transparent; border-top: 105px solid #ff8fab; }
-            .envelope-front { border-left: 150px solid transparent; border-right: 150px solid transparent; border-bottom: 105px solid #ffc4d9; }
-        }
-
-        .intro-screen.hide {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        /* ===== ENVELOPE OPENING INTRO ===== */
-        .envelope-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1a0a1a 0%, #2d1b3d 50%, #1a0a1a 100%);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .envelope-container.hide {
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-
-        .envelope {
-            position: relative;
-            width: 320px;
-            height: 220px;
-            cursor: pointer;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .envelope-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             background: linear-gradient(135deg, #ffb6d9 0%, #ff6b9d 50%, #ff8fab 100%);
             border-radius: 0 0 20px 20px;
             box-shadow: 0 10px 40px rgba(255, 107, 157, 0.4);
@@ -582,13 +393,10 @@
 
         .envelope-flap {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 160px solid transparent;
-            border-right: 160px solid transparent;
-            border-top: 110px solid #ff8fab;
+            top: 0; left: 0; width: 0; height: 0;
+            border-left: 175px solid transparent;
+            border-right: 175px solid transparent;
+            border-top: 120px solid #ff8fab;
             transform-origin: top;
             transition: transform 0.6s ease 0.5s;
             z-index: 10;
@@ -596,60 +404,75 @@
 
         .envelope.open .envelope-flap {
             transform: rotateX(180deg);
+            z-index: 1; 
         }
 
         .envelope-front {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 160px solid transparent;
-            border-right: 160px solid transparent;
-            border-bottom: 110px solid #ffa3c4;
+            bottom: 0; left: 0; width: 0; height: 0;
+            border-left: 175px solid transparent;
+            border-right: 175px solid transparent;
+            border-bottom: 120px solid #ffa3c4;
             z-index: 8;
         }
 
-        .envelope-text {
+        .envelope-glow {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.6rem;
-            color: #2d1b3d;
-            text-align: center;
-            width: 80%;
+            width: 100%; height: 100%;
+            border-radius: 20px;
+            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.8) 0%, rgba(255, 182, 217, 0.6) 40%, transparent 70%);
+            opacity: 0;
             z-index: 5;
-            opacity: 1;
-            transition: opacity 0.3s ease;
-            line-height: 1.3;
+            pointer-events: none;
         }
 
-        .envelope.open .envelope-text {
-            opacity: 0;
+        .envelope.open .envelope-glow {
+            animation: glowPulse 2s ease forwards;
         }
 
-        .envelope-hearts {
-            position: absolute;
-            top: 30%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2rem;
-            opacity: 0;
-            z-index: 3;
-            white-space: nowrap;
-        }
-
-        .envelope.open .envelope-hearts {
-            animation: burstHearts 1.2s ease forwards;
-        }
-
-        @keyframes burstHearts {
+        @keyframes glowPulse {
             0% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
-            30% { opacity: 1; transform: translate(-50%, -50%) scale(1.3); }
-            60% { opacity: 0.8; transform: translate(-50%, -60%) scale(1); }
-            100% { opacity: 0; transform: translate(-50%, -100%) scale(0.5); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(2.5); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(3); }
+        }
+
+        .intro-sparkles {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1500;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .intro-sparkles.show { opacity: 1; }
+
+        .intro-sparkles .sparkle-particle {
+            position: absolute;
+            font-size: 2.5rem;
+            animation: fullScreenBurst 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes fullScreenBurst {
+            0% { opacity: 1; transform: translate(-50%, -50%) scale(0.5); }
+            70% { opacity: 1; transform: translate(var(--x), var(--y)) scale(1.5); }
+            100% { opacity: 0; transform: translate(var(--x-end), var(--y-end)) scale(0.2); }
+        }
+
+        .scene-transition-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: white;
+            z-index: 2500;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease;
+        }
+        
+        .scene-transition-overlay.flash {
+            opacity: 1;
         }
 
         @media (max-width: 600px) {
@@ -657,15 +480,16 @@
             .main-gif { width: 220px; height: 200px; }
             .btn { padding: 14px 30px; font-size: 1.1rem; }
             .buttons-container { gap: 15px; }
-            .envelope { width: 260px; height: 180px; }
-            .envelope-flap { border-left: 130px solid transparent; border-right: 130px solid transparent; border-top: 90px solid #ff8fab; }
-            .envelope-front { border-left: 130px solid transparent; border-right: 130px solid transparent; border-bottom: 90px solid #ffa3c4; }
-            .envelope-text { font-size: 1.3rem; }
+            .intro-typewriter { font-size: 2.5rem; top: 10%; }
+            .envelope { width: 280px; height: 190px; }
+            .envelope-flap { border-left: 140px solid transparent; border-right: 140px solid transparent; border-top: 95px solid #ff8fab; }
+            .envelope-front { border-left: 140px solid transparent; border-right: 140px solid transparent; border-bottom: 95px solid #ffa3c4; }
         }
     </style>
 </head>
 <body>
-    <!-- ENVELOPE OPENING INTRO -->
+    <div class="scene-transition-overlay" id="scene-transition"></div>
+
     <div class="envelope-container" id="envelope-container">
         <div class="intro-typewriter" id="intro-typewriter"></div>
         <div class="envelope-wrapper">
@@ -674,41 +498,28 @@
                 <div class="envelope-flap"></div>
                 <div class="envelope-front"></div>
                 <div class="envelope-glow"></div>
-                <div class="sparkle" style="--tx: -120px; --ty: -100px; --tx-end: -250px; --ty-end: -200px;">✨</div>
-                <div class="sparkle" style="--tx: 120px; --ty: -100px; --tx-end: 250px; --ty-end: -200px;">✨</div>
-                <div class="sparkle" style="--tx: -180px; --ty: -30px; --tx-end: -350px; --ty-end: -80px;">💕</div>
-                <div class="sparkle" style="--tx: 180px; --ty: -30px; --tx-end: 350px; --ty-end: -80px;">💕</div>
-                <div class="sparkle" style="--tx: -100px; --ty: 60px; --tx-end: -200px; --ty-end: 120px;">💖</div>
-                <div class="sparkle" style="--tx: 100px; --ty: 60px; --tx-end: 200px; --ty-end: 120px;">💗</div>
-                <div class="sparkle" style="--tx: -60px; --ty: -150px; --tx-end: -120px; --ty-end: -300px;">💝</div>
-                <div class="sparkle" style="--tx: 60px; --ty: -150px; --tx-end: 120px; --ty-end: -300px;">💝</div>
-                <div class="sparkle" style="--tx: -200px; --ty: 20px; --tx-end: -400px; --ty-end: 30px;">⭐</div>
-                <div class="sparkle" style="--tx: 200px; --ty: 20px; --tx-end: 400px; --ty-end: 30px;">⭐</div>
-                <div class="sparkle" style="--tx: 0px; --ty: -180px; --tx-end: 0px; --ty-end: -350px;">💫</div>
-                <div class="sparkle" style="--tx: -140px; --ty: -60px; --tx-end: -280px; --ty-end: -120px;">🌟</div>
-                <div class="sparkle" style="--tx: 140px; --ty: -60px; --tx-end: 280px; --ty-end: -120px;">🌟</div>
             </div>
         </div>
     </div>
 
-    <!-- Full screen sparkles for transition -->
     <div class="intro-sparkles" id="intro-sparkles"></div>
 
     <div class="stars" id="stars"></div>
     <div class="heart-bg"></div>
     
     <div class="container">
-        <div class="question-container" id="question-container">
+        <div class="question-container hide" id="question-container">
             <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1eXp6ZzR4eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" 
                  class="main-gif floating"
-                 id="main-gif">
+                 id="main-gif"
+                 alt="Valentine Bear">
             
             <h1 class="title glow-text">Will You Be My Valentine?</h1>
             <p class="message">From your secret admirer 💕</p>
             
             <div class="buttons-container" id="buttons">
-                <button class="btn btn-yes" id="yes-btn" onclick="sayYes()">Yes! ❤️</button>
-                <button class="btn btn-no" id="no-btn" onmouseover="handleNoHover()">No 😢</button>
+                <button class="btn btn-yes" id="yes-btn" onmouseover="resetGif()" onclick="sayYes()">Yes! ❤️</button>
+                <button class="btn btn-no" id="no-btn" onmouseover="handleNoHover()" ontouchstart="handleNoHover()">No 😢</button>
             </div>
         </div>
 
@@ -733,7 +544,12 @@
     <div class="flower-container" id="flowers"></div>
 
     <script>
-        let noClickCount = 0;
+        let noGifChanged = false;
+        let lastMessageIndex = -1;
+        const normalGifUrl = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1eXp6ZzR4eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif";
+        const sadGifUrl = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjc0ZHI3bmQxaWtzcDBwczZ4eTA2M2Y1M3hvcnFvaHFzcWRveGY3NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/lPM06f2zvk94jBAzlP/giphy.gif";
+        const preloadedSadGif = new Image();
+        preloadedSadGif.src = sadGifUrl;
 
         const noMessages = [
             "Are you sure? 🥺",
@@ -743,7 +559,19 @@
             "Please say yes! 🙏",
             "My heart is breaking 💔",
             "One more chance? 🥺",
-            "I love you so much 😢"
+            "I love you so much 😢",
+            "Is that your final answer? 😰",
+            "You're breaking my heart! 😭",
+            "Think about our future! 🥺",
+            "Error 404: 'Yes' not found 🤖",
+            "Please reconsider! 🥺",
+            "Don't do this to me! 😩",
+            "I'll buy you good food! 🍕",
+            "Have a heart! ❤️‍🩹",
+            "I'm literally crying rn 😭",
+            "Press Yes for unlimited hugs! 🤗",
+            "Why are you running?! 🏃‍♂️💨",
+            "I promise to be good! 🥺"
         ];
 
         function createStars() {
@@ -762,12 +590,23 @@
         function handleNoHover() {
             moveNoButton();
             
-            noClickCount++;
-            
             const messageEl = document.getElementById('no-messages');
-            messageEl.textContent = noMessages[Math.min(noClickCount - 1, noMessages.length - 1)];
+            
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * noMessages.length);
+            } while (randomIndex === lastMessageIndex);
+            lastMessageIndex = randomIndex;
+            messageEl.textContent = noMessages[randomIndex];
+            
+            messageEl.classList.remove('show');
+            void messageEl.offsetWidth;
             messageEl.classList.add('show');
-            setTimeout(() => messageEl.classList.remove('show'), 4000);
+            
+            if (!noGifChanged) {
+                document.getElementById('main-gif').src = sadGifUrl;
+                noGifChanged = true;
+            }
         }
 
         function moveNoButton() {
@@ -779,7 +618,12 @@
             noBtn.style.position = 'fixed';
             noBtn.style.left = Math.max(10, Math.min(x, window.innerWidth - noBtn.offsetWidth - 10)) + 'px';
             noBtn.style.top = Math.max(10, Math.min(y, window.innerHeight - noBtn.offsetHeight - 10)) + 'px';
-            noBtn.style.zIndex = '1000';
+        }
+
+
+        function resetGif() {
+            document.getElementById('main-gif').src = normalGifUrl;
+            noGifChanged = false;
         }
 
         function sayYes() {
@@ -859,6 +703,8 @@
             const introTypewriter = document.getElementById('intro-typewriter');
             const envelopeContainer = document.getElementById('envelope-container');
             const introSparkles = document.getElementById('intro-sparkles');
+            const flashTransition = document.getElementById('scene-transition');
+            const questionContainer = document.getElementById('question-container');
             const introText = "Something special for you...";
             let charIndex = 0;
 
@@ -869,22 +715,32 @@
                     setTimeout(type, 120);
                 } else {
                     setTimeout(() => {
-                        envelope.classList.remove('no-float');
+                        introTypewriter.classList.add('fade-out');
+                        envelope.classList.remove('no-float'); 
                         envelope.classList.add('pop');
+                        
                         setTimeout(() => {
-                            envelope.classList.add('shake');
                             envelope.classList.add('open');
+                            
                             setTimeout(() => {
                                 createIntroSparkles();
                                 introSparkles.classList.add('show');
+                                
                                 setTimeout(() => {
-                                    envelopeContainer.classList.add('hide');
-                                    introSparkles.classList.remove('show');
+                                    envelope.classList.add('expand-massive');
+                                    
                                     setTimeout(() => {
-                                        envelopeContainer.style.display = 'none';
-                                        introSparkles.style.display = 'none';
-                                    }, 500);
-                                }, 2500);
+                                        flashTransition.classList.add('flash');
+                                        
+                                        setTimeout(() => {
+                                            envelopeContainer.style.display = 'none';
+                                            introSparkles.style.display = 'none';
+                                            questionContainer.classList.remove('hide');
+                                            
+                                            flashTransition.classList.remove('flash');
+                                        }, 800);
+                                    }, 800);
+                                }, 1200);
                             }, 600);
                         }, 600);
                     }, 800);
@@ -901,40 +757,31 @@
 
         function createIntroSparkles() {
             const container = document.getElementById('intro-sparkles');
-            const particles = ['✨', '💕', '💖', '💗', '💓', '💝', '⭐', '🌟', '💫'];
+            const particles = ['✨', '💕', '💖', '💗', '💓', '💝', '⭐', '🌟', '💫', '🤍', '❤️'];
             
-            for (let i = 0; i < 60; i++) {
+            for (let i = 0; i < 150; i++) {
                 setTimeout(() => {
                     const particle = document.createElement('div');
                     particle.className = 'sparkle-particle';
                     particle.textContent = particles[Math.floor(Math.random() * particles.length)];
                     
+                    particle.style.setProperty('--x', (Math.random() * 300 - 150) + 'vw');
+                    particle.style.setProperty('--y', (Math.random() * 300 - 150) + 'vh');
+                    particle.style.setProperty('--x-end', (Math.random() * 500 - 250) + 'vw');
+                    particle.style.setProperty('--y-end', (Math.random() * 500 - 250) + 'vh');
+                    
                     particle.style.left = '50%';
                     particle.style.top = '50%';
-                    
-                    const angle = (Math.random() * 360) * (Math.PI / 180);
-                    const distance = 200 + Math.random() * 400;
-                    const x = Math.cos(angle) * distance;
-                    const y = Math.sin(angle) * distance;
-                    const xEnd = Math.cos(angle) * (distance + 200);
-                    const yEnd = Math.sin(angle) * (distance + 200);
-                    
-                    particle.style.setProperty('--x', `calc(50% + ${x}px)`);
-                    particle.style.setProperty('--y', `calc(50% + ${y}px)`);
-                    particle.style.setProperty('--x-end', `calc(50% + ${xEnd}px)`);
-                    particle.style.setProperty('--y-end', `calc(50% + ${yEnd}px)`);
-                    
-                    particle.style.fontSize = (1.5 + Math.random() * 2) + 'rem';
-                    particle.style.animationDuration = (1.5 + Math.random() * 1) + 's';
-                    
                     container.appendChild(particle);
-                    
-                    setTimeout(() => particle.remove(), 3000);
-                }, i * 30);
+
+                    setTimeout(() => particle.remove(), 2000);
+                }, i * 10);
             }
         }
 
-        typeWriter();
+        window.onload = () => {
+            typeWriter();
+        };
     </script>
 </body>
 </html>
